@@ -9,7 +9,7 @@ end
 winners = {}
 move_counts = []
 
-100.times do
+100.times do |i|
   players = ARGV[0,2].map{ |s| Module.const_get(s).new }
 
   game = Battleship::Game.new(10, [2, 3, 3, 4, 5], *players)
@@ -17,7 +17,7 @@ move_counts = []
     game.tick
   end
   
-  print '.'
+  puts "\e[H\e[2J" + "#{i + 1}"
   
   winners[game.winner.name] ||= 0
   winners[game.winner.name] += 1

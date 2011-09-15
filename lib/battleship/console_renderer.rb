@@ -1,6 +1,6 @@
 module Battleship
   class ConsoleRenderer
-    RESET = "\e[2J"
+    RESET = "\e[H\e[2J"
 
     def initialize(output=$stdout)
       @output = output
