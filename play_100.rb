@@ -7,6 +7,8 @@ Dir[File.expand_path("../players/*.rb", __FILE__)].each do |path|
 end
 
 winners = {}
+move_counts = []
+
 100.times do
   players = ARGV[0,2].map{ |s| Module.const_get(s).new }
 
@@ -19,6 +21,9 @@ winners = {}
   
   winners[game.winner.name] ||= 0
   winners[game.winner.name] += 1
+  move_counts << game.move_count
 end
 
-puts "Results after 100 runs:", winners.inspect
+puts ""
+puts "Results after 100 runs: #{winners.inspect}"
+puts "Average number of moves: #{move_counts.inject(&:+) / move_counts.count}"

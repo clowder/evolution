@@ -6,16 +6,22 @@ module Battleship
       @state = build_initial_state(size, expected_fleet, players)
 
       @turn = 0
+      @move_count = 0
 
       @winner = @state.reverse.reject{ |player, opponent, board| board.valid? }.
                                map{ |player, opponent, board| player }.first
     end
 
     attr_reader :winner
-
+    
+    def move_count
+      @move_count.ceil
+    end
+    
     def tick
       player, opponent, board = @state[@turn]
       @turn = -(@turn - 1)
+      @move_count += 0.5
 
       result = board.try(player.take_turn(board.report, board.ships_remaining))
       @winner = player if board.sunk?
