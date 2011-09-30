@@ -13,7 +13,7 @@ end
 @renderer    = Battleship::ConsoleRenderer.new if !!@render
 @players     = ARGV[0,2].map{ |s| Module.const_get(s).new }
 
-100.times do |i|
+500.times do |i|
   game = Battleship::Game.new(10, [2, 3, 3, 4, 5], *@players)
 
   until game.winner
